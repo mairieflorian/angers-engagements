@@ -5,12 +5,12 @@ import dynamic from 'next/dynamic';
 import commitmentsData from '../data/commitments.json';
 import electedData from '../data/elected.json';
 
-// Chargement dynamique du composant Carte Leaflet sans SSR
+// Dynamic import sans SSR pour éviter l'erreur window is not defined avec Leaflet
 const TravauxMap = dynamic(() => import('../components/TravauxMap'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-[600px] flex items-center justify-center bg-white rounded-2xl border border-slate-200">
-      <p className="text-slate-500 font-medium">Chargement de la carte des travaux...</p>
+      <p className="text-slate-500 font-medium animate-pulse">Chargement de la carte des travaux...</p>
     </div>
   ),
 });
@@ -49,7 +49,6 @@ export default function App() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [roleFilter, setRoleFilter] = useState('ALL');
 
-  // Gestion du changement d'onglet avec réinitialisation de recherche
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     setSearchTerm('');
@@ -71,7 +70,6 @@ export default function App() {
       const matchCat = filterCategory === 'ALL' || item.category === filterCategory;
       const matchDist = filterDistrict === 'ALL' || (item.district || 'Tous les quartiers') === filterDistrict;
       const matchStatus = filterStatus === 'ALL' || item.status === filterStatus;
-      // Compatibilité filtre Génération Angers (champ boolean isGenerationAngers ou isTop10)
       const matchGenAngers = !onlyGenAngers || item.isGenerationAngers === true || item.isTop10 === true;
       const matchSearch = (item.title || '').toLowerCase().includes(searchTerm.toLowerCase());
       return matchCat && matchDist && matchStatus && matchGenAngers && matchSearch;
@@ -315,7 +313,7 @@ export default function App() {
                 🚧 Carte des Travaux & Perturbations à Angers
               </h2>
               <p className="text-xs text-slate-500">
-                Données mises à jour en temps réel via l'API Open Data d'Angers Loire Métropole.
+                Données synchronisées en temps réel depuis le portail Open Data Ville d'Angers.
               </p>
             </div>
             <TravauxMap />
@@ -323,7 +321,7 @@ export default function App() {
         )}
       </main>
 
-      {/* MODALE DÉTAILS D'UN ENGAGEMENT */}
+      {/* MODALE DETAILS */}
       {selectedItem && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
