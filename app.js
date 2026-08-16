@@ -128,4 +128,51 @@ function initTravauxMap() {
     .catch(error => {
       console.error('Erreur lors du chargement des données travaux :', error);
     });
+// Fonction pour injecter le HTML des onglets et de la carte
+function injectNavigationAndMapContainer() {
+  // 1. Ajouter le lien CSS pour Leaflet dans le head
+  if (!document.getElementById('leaflet-css')) {
+    const link = document.createElement('link');
+    link.id = 'leaflet-css';
+    link.rel = 'stylesheet';
+    link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(link);
+  }
+
+  // 2. Ajouter le script JS pour Leaflet
+  if (!window.L) {
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.onload = () => console.log('Leaflet chargé avec succès');
+    document.head.appendChild(script);
+  }
+
+  // 3. Injecter les boutons d'onglets en haut de la page (au-dessus du conteneur principal)
+  const mainContainer = document.querySelector('main') || document.body.firstElementChild;
+  
+  if (mainContainer && !document.getElementById('tabs-navigation')) {
+    const navDiv = document.createElement('div');
+    navDiv.id = 'tabs-navigation';
+    navDiv.className = 'flex gap-4 mb-6 border-b pb-2'; // Style Tailwind CSS
+    navDiv.innerHTML = `
+      <button onclick="switchTab('engagements')" class="px-4 py-2 font-bold text-blue-600 border-b-2 border-blue-600 focus:outline-none">📋 Engagements</button>
+      <button onclick="switchTab('travaux')" class="px-4 py-2 font-bold text-gray-500 hover:text-blue-600 focus:outline-none">🚧 Info Travaux</button>
+    `;
+    mainContainer.parentNode.insertBefore(navDiv, mainContainer);
+    
+    // Identifier le conteneur existant des engagements
+    mainContainer.id = 'tab-engagements';
+
+    // 4. Créer le conteneur pour la carte travaux (masqué par défaut)
+    const travauxDiv = document.createElement('div');
+    travauxDiv.id = 'tab-travaux';
+    travauxDiv.style.display = 'none';
+    travauxDiv.className = 'w-full h-[600px] rounded-lg shadow-md overflow-hidden';
+    travauxDiv.innerHTML = `<div id="map-travaux" style="width: 100%; height: 600px;"></div>`;
+    
+    mainContainer.parentNode.appendChild(travauxDiv);
+  }
 }
+
+// Appeler l'injection dès que le DOM est prêt
+document.addEventListener('DOMContentLoaded', injectNavigationAndMapContainer);}
