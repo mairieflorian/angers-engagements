@@ -1,0 +1,119 @@
+[
+  {
+    "id": "TOP-01",
+    "category": "Sécurité",
+    "title": "Augmenter les effectifs de la Police municipale de 75 à 100 agents",
+    "status": "A_FAIRE",
+    "progress": 0,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "TOP-02",
+    "category": "Sécurité / Déplacements",
+    "title": "Adopter un plan de sécurité routière et lutter contre les incivilités (voitures, trottinettes, vélos, rodéos...)",
+    "status": "A_FAIRE",
+    "progress": 0,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "TOP-03",
+    "category": "Enfance / Famille",
+    "title": "Faire de l'enfance et de l'adolescence la Grande cause du mandat et organiser des Assises de la Parentalité",
+    "status": "A_FAIRE",
+    "progress": 0,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "TOP-04",
+    "category": "Éducation",
+    "title": "Offrir à chaque enfant de CE1 et CE2 un abonnement à un magazine de lecture jeunesse",
+    "status": "A_FAIRE",
+    "progress": 0,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "TOP-05",
+    "category": "Transports / Écologie",
+    "title": "Développer les pistes irigovélo et acheter des tramways rallongés pour les heures de pointe",
+    "status": "EN_COURS",
+    "progress": 25,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "TOP-06",
+    "category": "Solidarités / Culture",
+    "title": "Soutenir l'organisation de bals populaires et de thés dansants (ex: La Godeline)",
+    "status": "A_FAIRE",
+    "progress": 0,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "TOP-07",
+    "category": "Logement / Urbanisme",
+    "title": "Créer une bourse d'échanges de logements dans le parc social",
+    "status": "A_FAIRE",
+    "progress": 0,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "TOP-08",
+    "category": "Logement",
+    "title": "Mettre en place une assurance communale habitation pour le pouvoir d'achat",
+    "status": "A_FAIRE",
+    "progress": 0,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "TOP-09",
+    "category": "Commerce",
+    "title": "Attirer dans le centre-ville des enseignes nationales de renommée et des indépendants",
+    "status": "EN_COURS",
+    "progress": 15,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "TOP-10",
+    "category": "Fiscalité",
+    "title": "Ne pas augmenter les impôts au cours des 6 prochaines années",
+    "status": "FAIT",
+    "progress": 100,
+    "isTop10": true,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "SEC-02",
+    "category": "Sécurité",
+    "title": "Installer +150 caméras de vidéoprotection supplémentaires",
+    "status": "A_FAIRE",
+    "progress": 0,
+    "isTop10": false,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "EDU-01",
+    "category": "Éducation",
+    "title": "Créer un référent harcèlement scolaire dans chaque école et former les animateurs",
+    "status": "A_FAIRE",
+    "progress": 0,
+    "isTop10": false,
+    "lastUpdate": "2026-03-01"
+  },
+  {
+    "id": "ECO-01",
+    "category": "Transition Écologique",
+    "title": "Viser l'obtention du label Capitale verte européenne",
+    "status": "EN_COURS",
+    "progress": 10,
+    "isTop10": false,
+    "lastUpdate": "2026-03-01"
+  }
+]
