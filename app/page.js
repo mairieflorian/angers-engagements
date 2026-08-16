@@ -1,8 +1,19 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import commitmentsData from '../data/commitments.json';
 import electedData from '../data/elected.json';
+
+// Chargement dynamique du composant Carte Leaflet sans SSR
+const TravauxMap = dynamic(() => import('../components/TravauxMap'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[600px] flex items-center justify-center bg-white rounded-2xl border border-slate-200">
+      <p className="text-slate-500 font-medium">Chargement de la carte des travaux...</p>
+    </div>
+  ),
+});
 
 function ElectedAvatar({ photo, name, firstName, lastName }) {
   const [imgError, setImgError] = useState(false);
@@ -33,10 +44,16 @@ export default function App() {
   const [filterCategory, setFilterCategory] = useState('ALL');
   const [filterDistrict, setFilterDistrict] = useState('ALL');
   const [filterStatus, setFilterStatus] = useState('ALL');
-  const [onlyTop10, setOnlyTop10] = useState(false);
+  const [onlyGenAngers, setOnlyGenAngers] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
   const [roleFilter, setRoleFilter] = useState('ALL');
+
+  // Gestion du changement d'onglet avec réinitialisation de recherche
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setSearchTerm('');
+  };
 
   const districts = useMemo(() => {
     if (!Array.isArray(commitmentsData)) return ['ALL'];
@@ -54,11 +71,12 @@ export default function App() {
       const matchCat = filterCategory === 'ALL' || item.category === filterCategory;
       const matchDist = filterDistrict === 'ALL' || (item.district || 'Tous les quartiers') === filterDistrict;
       const matchStatus = filterStatus === 'ALL' || item.status === filterStatus;
-      const matchTop10 = !onlyTop10 || item.isTop10;
+      // Compatibilité filtre Génération Angers (champ boolean isGenerationAngers ou isTop10)
+      const matchGenAngers = !onlyGenAngers || item.isGenerationAngers === true || item.isTop10 === true;
       const matchSearch = (item.title || '').toLowerCase().includes(searchTerm.toLowerCase());
-      return matchCat && matchDist && matchStatus && matchTop10 && matchSearch;
+      return matchCat && matchDist && matchStatus && matchGenAngers && matchSearch;
     });
-  }, [filterCategory, filterDistrict, filterStatus, onlyTop10, searchTerm]);
+  }, [filterCategory, filterDistrict, filterStatus, onlyGenAngers, searchTerm]);
 
   const generateEmail = (firstName = '', lastName = '') => {
     const cleanStr = (str) =>
@@ -92,9 +110,9 @@ export default function App() {
             <h1 className="text-2xl font-bold">Angers - Observatoire Citoyen</h1>
             <p className="text-slate-400 text-sm">Suivi des engagements et de l'équipe municipale</p>
           </div>
-          <nav className="flex gap-2 bg-slate-800 p-1.5 rounded-xl">
+          <nav className="flex flex-wrap gap-2 bg-slate-800 p-1.5 rounded-xl">
             <button
-              onClick={() => setActiveTab('commitments')}
+              onClick={() => handleTabChange('commitments')}
               className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                 activeTab === 'commitments' ? 'bg-blue-600 text-white shadow' : 'text-slate-400 hover:text-white'
               }`}
@@ -102,30 +120,39 @@ export default function App() {
               📋 Engagements ({filteredCommitments.length})
             </button>
             <button
-              onClick={() => setActiveTab('team')}
+              onClick={() => handleTabChange('team')}
               className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                 activeTab === 'team' ? 'bg-blue-600 text-white shadow' : 'text-slate-400 hover:text-white'
               }`}
             >
               👥 Conseil Municipal ({Array.isArray(electedData) ? electedData.length : 0})
             </button>
+            <button
+              onClick={() => handleTabChange('travaux')}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                activeTab === 'travaux' ? 'bg-orange-600 text-white shadow' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              🚧 Info Travaux
+            </button>
           </nav>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-8">
-        {activeTab === 'commitments' ? (
+        {/* ONGLET 1 : ENGAGEMENTS */}
+        {activeTab === 'commitments' && (
           <>
             <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-3 items-center">
               <input
                 type="text"
                 placeholder="🔍 Rechercher une mesure..."
-                className="px-4 py-2 bg-slate-50 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               <select 
-                className="px-3 py-2 bg-slate-50 border rounded-xl text-sm"
+                className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
                 value={filterDistrict}
                 onChange={(e) => setFilterDistrict(e.target.value)}
               >
@@ -135,7 +162,7 @@ export default function App() {
                 ))}
               </select>
               <select 
-                className="px-3 py-2 bg-slate-50 border rounded-xl text-sm"
+                className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
                 value={filterCategory}
                 onChange={(e) => setFilterCategory(e.target.value)}
               >
@@ -145,7 +172,7 @@ export default function App() {
                 ))}
               </select>
               <select 
-                className="px-3 py-2 bg-slate-50 border rounded-xl text-sm"
+                className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
               >
@@ -155,9 +182,9 @@ export default function App() {
                 <option value="Réalisé">✅ Réalisé</option>
               </select>
               <button
-                onClick={() => setOnlyTop10(!onlyTop10)}
+                onClick={() => setOnlyGenAngers(!onlyGenAngers)}
                 className={`px-3 py-2 rounded-xl text-sm font-semibold transition-all border ${
-                  onlyTop10 ? 'bg-amber-100 border-amber-300 text-amber-900' : 'bg-slate-50 border-slate-200 text-slate-600'
+                  onlyGenAngers ? 'bg-amber-100 border-amber-300 text-amber-900' : 'bg-slate-50 border-slate-200 text-slate-600'
                 }`}
               >
                 ⭐ Générations Angers
@@ -165,9 +192,9 @@ export default function App() {
             </section>
 
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {filteredCommitments.map((item) => (
+              {filteredCommitments.map((item, index) => (
                 <div 
-                  key={item.id} 
+                  key={item.id || index} 
                   onClick={() => setSelectedItem(item)}
                   className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between"
                 >
@@ -185,19 +212,22 @@ export default function App() {
                     <h3 className="font-bold text-slate-900 mb-4">{item.title}</h3>
                   </div>
                   <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div className="bg-blue-600 h-full" style={{ width: `${item.progress || 0}%` }}></div>
+                    <div className="bg-blue-600 h-full transition-all duration-300" style={{ width: `${item.progress || 0}%` }}></div>
                   </div>
                 </div>
               ))}
             </section>
           </>
-        ) : (
+        )}
+
+        {/* ONGLET 2 : CONSEIL MUNICIPAL */}
+        {activeTab === 'team' && (
           <>
             <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-3 items-center justify-between">
               <input
                 type="text"
                 placeholder="🔍 Rechercher un élu, une fonction..."
-                className="px-4 py-2 bg-slate-50 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-80"
+                className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-80"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -231,12 +261,12 @@ export default function App() {
             </section>
 
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {filteredElected.map((elus) => {
+              {filteredElected.map((elus, index) => {
                 const email = generateEmail(elus.firstName, elus.lastName);
 
                 return (
                   <div 
-                    key={elus.id} 
+                    key={elus.id || index} 
                     className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all text-center flex flex-col justify-between items-center"
                   >
                     <div className="flex flex-col items-center w-full">
@@ -276,8 +306,24 @@ export default function App() {
             </section>
           </>
         )}
+
+        {/* ONGLET 3 : INFO TRAVAUX */}
+        {activeTab === 'travaux' && (
+          <section className="space-y-4">
+            <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+              <h2 className="text-lg font-bold text-slate-900 mb-1">
+                🚧 Carte des Travaux & Perturbations à Angers
+              </h2>
+              <p className="text-xs text-slate-500">
+                Données mises à jour en temps réel via l'API Open Data d'Angers Loire Métropole.
+              </p>
+            </div>
+            <TravauxMap />
+          </section>
+        )}
       </main>
 
+      {/* MODALE DÉTAILS D'UN ENGAGEMENT */}
       {selectedItem && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
@@ -300,12 +346,12 @@ export default function App() {
                 </p>
               </div>
 
-              {selectedItem.details?.updates && (
+              {selectedItem.details?.updates && selectedItem.details.updates.length > 0 && (
                 <div>
                   <h4 className="text-xs font-bold uppercase text-slate-400 mb-2">Historique des actions</h4>
                   <ul className="space-y-2">
                     {selectedItem.details.updates.map((update, idx) => (
-                      <li key={idx} className="text-xs bg-slate-50 p-2.5 rounded-lg border text-slate-600">
+                      <li key={idx} className="text-xs bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-slate-600">
                         {update}
                       </li>
                     ))}
