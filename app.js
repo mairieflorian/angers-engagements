@@ -11,7 +11,7 @@ fetch('data/commitments.json')
   })
   .then(data => {
     commitmentsData = data;
-    renderCards(commitmentsData);
+    if (typeof renderCards === 'function') renderCards(commitmentsData);
     populateQuartierFilter(commitmentsData);
   })
   .catch(error => {
@@ -26,7 +26,6 @@ function filterCommitments() {
   const isGenAngersChecked = document.getElementById('checkbox-generation-angers')?.checked || false;
 
   const filtered = commitmentsData.filter(item => {
-    // Gestion du nom de clé dans votre JSON (quartier/district et category/thematique/status)
     const itemQuartier = item.quartier || item.district;
     const itemThematique = item.thematique || item.category;
     const itemStatut = item.statut || item.status;
@@ -35,13 +34,12 @@ function filterCommitments() {
     const matchThematique = (selectedThematique === 'Toutes') || (itemThematique === selectedThematique);
     const matchStatut = (selectedStatut === 'Tous') || (itemStatut === selectedStatut);
     
-    // Filtre Génération Angers (vérifie la propriété isGenerationAngers du JSON)
     const matchGenAngers = !isGenAngersChecked || item.isGenerationAngers === true;
     
     return matchQuartier && matchThematique && matchStatut && matchGenAngers;
   });
 
-  renderCards(filtered);
+  if (typeof renderCards === 'function') renderCards(filtered);
 }
 
 // Remplissage dynamique des options du filtre Quartier
@@ -61,7 +59,7 @@ function populateQuartierFilter(data) {
 }
 
 // -------------------------------------------------------------
-// NOUVEAU : GESTION DES ONGLETS ET CARTE INFO TRAVAUX
+// GESTION DES ONGLETS ET CARTE INFO TRAVAUX
 // -------------------------------------------------------------
 
 // Fonction pour basculer entre les onglets de l'application
@@ -88,6 +86,13 @@ function switchTab(tabName) {
 function initTravauxMap() {
   const mapContainer = document.getElementById('map-travaux');
   if (!mapContainer) return;
+
+  // Vérification que Leaflet est bien chargé avant d'initialiser
+  if (typeof L === 'undefined') {
+    console.warn("Leaflet n'est pas encore chargé, nouvel essai dans 300ms...");
+    setTimeout(initTravauxMap, 300);
+    return;
+  }
 
   // Centrage sur Angers
   const map = L.map('map-travaux').setView([47.4784, -0.5632], 13);
@@ -128,7 +133,9 @@ function initTravauxMap() {
     .catch(error => {
       console.error('Erreur lors du chargement des données travaux :', error);
     });
-// Fonction pour injecter le HTML des onglets et de la carte
+}
+
+// Injection dynamique du DOM pour insérer les onglets et le conteneur de carte
 function injectNavigationAndMapContainer() {
   // 1. Ajouter le lien CSS pour Leaflet dans le head
   if (!document.getElementById('leaflet-css')) {
@@ -140,20 +147,21 @@ function injectNavigationAndMapContainer() {
   }
 
   // 2. Ajouter le script JS pour Leaflet
-  if (!window.L) {
+  if (!document.getElementById('leaflet-js') && !window.L) {
     const script = document.createElement('script');
+    script.id = 'leaflet-js';
     script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
     script.onload = () => console.log('Leaflet chargé avec succès');
     document.head.appendChild(script);
   }
 
-  // 3. Injecter les boutons d'onglets en haut de la page (au-dessus du conteneur principal)
+  // 3. Injecter les boutons d'onglets en haut du conteneur principal
   const mainContainer = document.querySelector('main') || document.body.firstElementChild;
   
   if (mainContainer && !document.getElementById('tabs-navigation')) {
     const navDiv = document.createElement('div');
     navDiv.id = 'tabs-navigation';
-    navDiv.className = 'flex gap-4 mb-6 border-b pb-2'; // Style Tailwind CSS
+    navDiv.className = 'flex gap-4 mb-6 border-b pb-2';
     navDiv.innerHTML = `
       <button onclick="switchTab('engagements')" class="px-4 py-2 font-bold text-blue-600 border-b-2 border-blue-600 focus:outline-none">📋 Engagements</button>
       <button onclick="switchTab('travaux')" class="px-4 py-2 font-bold text-gray-500 hover:text-blue-600 focus:outline-none">🚧 Info Travaux</button>
@@ -175,4 +183,8 @@ function injectNavigationAndMapContainer() {
 }
 
 // Appeler l'injection dès que le DOM est prêt
-document.addEventListener('DOMContentLoaded', injectNavigationAndMapContainer);}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', injectNavigationAndMapContainer);
+} else {
+  injectNavigationAndMapContainer();
+}
