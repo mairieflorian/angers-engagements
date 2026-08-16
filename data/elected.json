@@ -379,15 +379,6 @@
   },
   {
     "id": "43",
-    "firstName": "Ivan",
-    "lastName": "Martineau",
-    "name": "Ivan Martineau",
-    "role": "Conseiller municipal",
-    "delegation": "Mémoire, Éducation",
-    "photo": "https://www.angers.fr/uploads/_processed_/e/d/csm_martineau_8ccbeee6df.jpg"
-  },
-  {
-    "id": "44",
     "firstName": "Touraya",
     "lastName": "Marsli",
     "name": "Touraya Marsli",
@@ -396,7 +387,7 @@
     "photo": "https://www.angers.fr/uploads/_processed_/e/1/csm_marsli_6c4b5c6e97.jpg"
   },
   {
-    "id": "45",
+    "id": "44",
     "firstName": "Christophe",
     "lastName": "Marquet",
     "name": "Christophe Marquet",
@@ -405,7 +396,7 @@
     "photo": "https://www.angers.fr/uploads/_processed_/b/7/csm_marquet_ff6e0f7d35.jpg"
   },
   {
-    "id": "46",
+    "id": "45",
     "firstName": "Peggy",
     "lastName": "Vulin",
     "name": "Peggy Vulin",
@@ -414,7 +405,7 @@
     "photo": "https://www.angers.fr/uploads/_processed_/5/3/csm_vulin_44492e0102.jpg"
   },
   {
-    "id": "47",
+    "id": "46",
     "firstName": "Arnaud",
     "lastName": "Faget",
     "name": "Arnaud Faget",
