@@ -4,10 +4,8 @@ import React, { useState, useMemo } from 'react';
 import commitmentsData from '../data/commitments.json';
 import electedData from '../data/elected.json';
 
-// Composant pour gérer l'avatar avec fallback sans manipuler directement le DOM
 function ElectedAvatar({ photo, name, firstName, lastName }) {
   const [imgError, setImgError] = useState(false);
-
   const initials = `${(firstName || '?')[0]}${(lastName || '?')[0]}`;
 
   if (imgError || !photo) {
@@ -38,8 +36,6 @@ export default function App() {
   const [onlyTop10, setOnlyTop10] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
-
-  // Filtre supplémentaire pour les élus ('ALL', 'ADJOINT', 'CONSEILLER')
   const [roleFilter, setRoleFilter] = useState('ALL');
 
   const districts = useMemo(() => {
@@ -64,14 +60,13 @@ export default function App() {
     });
   }, [filterCategory, filterDistrict, filterStatus, onlyTop10, searchTerm]);
 
-  // Formateur dynamique sécurisé des adresses mail
   const generateEmail = (firstName = '', lastName = '') => {
     const cleanStr = (str) =>
       String(str)
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "") // Supprime les accents
-        .replace(/\s+/g, "-");          // Remplace les espaces par des tirets
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, "-");
 
     return `${cleanStr(firstName)}.${cleanStr(lastName)}@ville.angers.fr`;
   };
@@ -80,25 +75,17 @@ export default function App() {
     if (!Array.isArray(electedData)) return [];
     return electedData.filter(e => {
       const roleLower = (e.role || '').toLowerCase();
-      
       let matchRole = true;
-      if (roleFilter === 'ADJOINT') {
-        matchRole = roleLower.includes('adjoint');
-      } else if (roleFilter === 'CONSEILLER') {
-        matchRole = roleLower.includes('conseiller');
-      }
+      if (roleFilter === 'ADJOINT') matchRole = roleLower.includes('adjoint');
+      else if (roleFilter === 'CONSEILLER') matchRole = roleLower.includes('conseiller');
 
       const searchLower = searchTerm.toLowerCase();
-      const matchSearch = (e.name || '').toLowerCase().includes(searchLower) || 
-                          (e.delegation || '').toLowerCase().includes(searchLower);
-      
-      return matchRole && matchSearch;
+      return matchRole && ((e.name || '').toLowerCase().includes(searchLower) || (e.delegation || '').toLowerCase().includes(searchLower));
     });
   }, [roleFilter, searchTerm]);
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-800 pb-16">
-      {/* En-tête / Navigation */}
       <header className="bg-slate-900 text-white py-8 px-6 shadow-xl">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div>
@@ -112,7 +99,7 @@ export default function App() {
                 activeTab === 'commitments' ? 'bg-blue-600 text-white shadow' : 'text-slate-400 hover:text-white'
               }`}
             >
-              📋 Engagements
+              📋 Engagements ({filteredCommitments.length})
             </button>
             <button
               onClick={() => setActiveTab('team')}
@@ -129,8 +116,7 @@ export default function App() {
       <main className="max-w-6xl mx-auto px-4 py-8">
         {activeTab === 'commitments' ? (
           <>
-            {/* Filtres Engagements */}
-            <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-3">
+            <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-3 items-center">
               <input
                 type="text"
                 placeholder="🔍 Rechercher une mesure..."
@@ -153,14 +139,31 @@ export default function App() {
                 value={filterCategory}
                 onChange={(e) => setFilterCategory(e.target.value)}
               >
-                <option value="ALL">🏷️ Toutes catégories</option>
+                <option value="ALL">🏷️ Toutes thématiques</option>
                 {categories.filter(c => c !== 'ALL').map(c => (
                   <option key={c} value={c}>{c}</option>
                 ))}
               </select>
+              <select 
+                className="px-3 py-2 bg-slate-50 border rounded-xl text-sm"
+                value={filterStatus}
+                onChange={(e) => setFilterStatus(e.target.value)}
+              >
+                <option value="ALL">📊 Tous statuts</option>
+                <option value="À faire">⏳ À faire</option>
+                <option value="En cours">⚙️ En cours</option>
+                <option value="Réalisé">✅ Réalisé</option>
+              </select>
+              <button
+                onClick={() => setOnlyTop10(!onlyTop10)}
+                className={`px-3 py-2 rounded-xl text-sm font-semibold transition-all border ${
+                  onlyTop10 ? 'bg-amber-100 border-amber-300 text-amber-900' : 'bg-slate-50 border-slate-200 text-slate-600'
+                }`}
+              >
+                ⭐ Générations Angers
+              </button>
             </section>
 
-            {/* Cartes Engagements */}
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {filteredCommitments.map((item) => (
                 <div 
@@ -173,7 +176,11 @@ export default function App() {
                       <span className="text-xs font-semibold px-2.5 py-1 bg-slate-100 rounded text-slate-600">
                         📍 {item.district || 'Tous les quartiers'}
                       </span>
-                      <span className="text-xs font-bold text-blue-600">En savoir + →</span>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded ${
+                        item.status === 'Réalisé' ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'
+                      }`}>
+                        {item.status}
+                      </span>
                     </div>
                     <h3 className="font-bold text-slate-900 mb-4">{item.title}</h3>
                   </div>
@@ -185,7 +192,6 @@ export default function App() {
             </section>
           </>
         ) : (
-          /* Onglet Trombinoscope */
           <>
             <section className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-3 items-center justify-between">
               <input
@@ -272,7 +278,6 @@ export default function App() {
         )}
       </main>
 
-      {/* Modal Détails */}
       {selectedItem && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
