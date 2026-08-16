@@ -4,6 +4,32 @@ import React, { useState, useMemo } from 'react';
 import commitmentsData from '../data/commitments.json';
 import electedData from '../data/elected.json';
 
+// Composant pour gérer l'avatar avec fallback sans manipuler directement le DOM
+function ElectedAvatar({ photo, name, firstName, lastName }) {
+  const [imgError, setImgError] = useState(false);
+
+  const initials = `${(firstName || '?')[0]}${(lastName || '?')[0]}`;
+
+  if (imgError || !photo) {
+    return (
+      <div className="w-24 h-28 mb-3 rounded-xl bg-blue-100 border border-slate-200 flex items-center justify-center text-blue-800 font-bold text-lg shadow-inner">
+        {initials}
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-24 h-28 mb-3 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-inner">
+      <img
+        src={photo}
+        alt={name || 'Élu'}
+        className="w-full h-full object-cover"
+        onError={() => setImgError(true)}
+      />
+    </div>
+  );
+}
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('commitments');
   const [filterCategory, setFilterCategory] = useState('ALL');
@@ -13,32 +39,35 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // Filtre supplémentaire pour les élus
+  // Filtre supplémentaire pour les élus ('ALL', 'ADJOINT', 'CONSEILLER')
   const [roleFilter, setRoleFilter] = useState('ALL');
 
   const districts = useMemo(() => {
+    if (!Array.isArray(commitmentsData)) return ['ALL'];
     return ['ALL', ...new Set(commitmentsData.map(c => c.district || 'Tous les quartiers'))];
   }, []);
 
   const categories = useMemo(() => {
+    if (!Array.isArray(commitmentsData)) return ['ALL'];
     return ['ALL', ...new Set(commitmentsData.map(c => c.category))];
   }, []);
 
   const filteredCommitments = useMemo(() => {
+    if (!Array.isArray(commitmentsData)) return [];
     return commitmentsData.filter(item => {
       const matchCat = filterCategory === 'ALL' || item.category === filterCategory;
       const matchDist = filterDistrict === 'ALL' || (item.district || 'Tous les quartiers') === filterDistrict;
       const matchStatus = filterStatus === 'ALL' || item.status === filterStatus;
       const matchTop10 = !onlyTop10 || item.isTop10;
-      const matchSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchSearch = (item.title || '').toLowerCase().includes(searchTerm.toLowerCase());
       return matchCat && matchDist && matchStatus && matchTop10 && matchSearch;
     });
   }, [filterCategory, filterDistrict, filterStatus, onlyTop10, searchTerm]);
 
-  // Formateur dynamique des adresses mail
-  const generateEmail = (firstName, lastName) => {
+  // Formateur dynamique sécurisé des adresses mail
+  const generateEmail = (firstName = '', lastName = '') => {
     const cleanStr = (str) =>
-      str
+      String(str)
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "") // Supprime les accents
@@ -48,10 +77,21 @@ export default function App() {
   };
 
   const filteredElected = useMemo(() => {
+    if (!Array.isArray(electedData)) return [];
     return electedData.filter(e => {
-      const matchRole = roleFilter === 'ALL' || e.role === roleFilter;
-      const matchSearch = e.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          e.delegation.toLowerCase().includes(searchTerm.toLowerCase());
+      const roleLower = (e.role || '').toLowerCase();
+      
+      let matchRole = true;
+      if (roleFilter === 'ADJOINT') {
+        matchRole = roleLower.includes('adjoint');
+      } else if (roleFilter === 'CONSEILLER') {
+        matchRole = roleLower.includes('conseiller');
+      }
+
+      const searchLower = searchTerm.toLowerCase();
+      const matchSearch = (e.name || '').toLowerCase().includes(searchLower) || 
+                          (e.delegation || '').toLowerCase().includes(searchLower);
+      
       return matchRole && matchSearch;
     });
   }, [roleFilter, searchTerm]);
@@ -80,7 +120,7 @@ export default function App() {
                 activeTab === 'team' ? 'bg-blue-600 text-white shadow' : 'text-slate-400 hover:text-white'
               }`}
             >
-              👥 Conseil Municipal ({electedData.length})
+              👥 Conseil Municipal ({Array.isArray(electedData) ? electedData.length : 0})
             </button>
           </nav>
         </div>
@@ -138,7 +178,7 @@ export default function App() {
                     <h3 className="font-bold text-slate-900 mb-4">{item.title}</h3>
                   </div>
                   <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div className="bg-blue-600 h-full" style={{ width: `${item.progress}%` }}></div>
+                    <div className="bg-blue-600 h-full" style={{ width: `${item.progress || 0}%` }}></div>
                   </div>
                 </div>
               ))}
@@ -163,20 +203,20 @@ export default function App() {
                     roleFilter === 'ALL' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'
                   }`}
                 >
-                  Tous ({electedData.length})
+                  Tous ({Array.isArray(electedData) ? electedData.length : 0})
                 </button>
                 <button
-                  onClick={() => setRoleFilter('Adjoint au maire')}
+                  onClick={() => setRoleFilter('ADJOINT')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    roleFilter === 'Adjoint au maire' || roleFilter === 'Adjointe au maire' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'
+                    roleFilter === 'ADJOINT' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'
                   }`}
                 >
                   Adjoints
                 </button>
                 <button
-                  onClick={() => setRoleFilter('Conseiller municipal')}
+                  onClick={() => setRoleFilter('CONSEILLER')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    roleFilter === 'Conseiller municipal' || roleFilter === 'Conseillère municipale' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'
+                    roleFilter === 'CONSEILLER' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'
                   }`}
                 >
                   Conseillers
@@ -194,22 +234,16 @@ export default function App() {
                     className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all text-center flex flex-col justify-between items-center"
                   >
                     <div className="flex flex-col items-center w-full">
-                      <div className="w-24 h-28 mb-3 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-inner flex items-center justify-center">
-                        <img 
-                          src={elus.photo} 
-                          alt={elus.name} 
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.parentElement.classList.add('flex', 'items-center', 'justify-center', 'bg-blue-100', 'text-blue-800', 'font-bold');
-                            e.target.parentElement.innerText = `${elus.firstName[0]}${elus.lastName[0]}`;
-                          }}
-                        />
-                      </div>
+                      <ElectedAvatar
+                        photo={elus.photo}
+                        name={elus.name}
+                        firstName={elus.firstName}
+                        lastName={elus.lastName}
+                      />
 
                       <a 
                         href={`mailto:${email}`}
-                        title={`Envoyer un email à ${elus.name}`}
+                        title={`Envoyer un email à ${elus.name || 'l\'élu'}`}
                         className="font-bold text-base text-slate-900 hover:text-blue-600 hover:underline transition-colors"
                       >
                         {elus.name}
