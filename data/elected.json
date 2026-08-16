@@ -1,0 +1,425 @@
+[
+  {
+    "id": "1",
+    "firstName": "Christophe",
+    "lastName": "Béchu",
+    "name": "Christophe Béchu",
+    "role": "Maire",
+    "delegation": "Maire d'Angers",
+    "photo": "https://www.angers.fr/uploads/_processed_/b/8/csm_christophebechu2026_98489c50e9.jpg"
+  },
+  {
+    "id": "2",
+    "firstName": "Christelle",
+    "lastName": "Lardeux-Coiffard",
+    "name": "Christelle Lardeux-Coiffard",
+    "role": "Adjointe au maire",
+    "delegation": "Première adjointe au maire, déléguée aux Solidarités et à la Politique de la ville",
+    "photo": "https://www.angers.fr/uploads/_processed_/8/3/csm_lardeux_coiffard_124ad2ad86.jpg"
+  },
+  {
+    "id": "3",
+    "firstName": "Anthony",
+    "lastName": "Lusson",
+    "name": "Anthony Lusson",
+    "role": "Adjoint au maire",
+    "delegation": "Sécurité et Prévention",
+    "photo": "https://www.angers.fr/uploads/_processed_/3/f/csm_lusson_4465a7c34c.jpg"
+  },
+  {
+    "id": "4",
+    "firstName": "Jeanne",
+    "lastName": "Behre-Robinson",
+    "name": "Jeanne Behre-Robinson",
+    "role": "Adjointe au maire",
+    "delegation": "Urbanisme, Habitat, Logement et Renouvellement urbain",
+    "photo": "https://www.angers.fr/uploads/_processed_/d/7/csm_behre_robinson_46f44d5bd6.jpg"
+  },
+  {
+    "id": "5",
+    "firstName": "Roch",
+    "lastName": "Brancour",
+    "name": "Roch Brancour",
+    "role": "Adjoint au maire",
+    "delegation": "Développement économique, Commerce, Emploi",
+    "photo": "https://www.angers.fr/uploads/_processed_/1/6/csm_brancour_4bab26df6c.jpg"
+  },
+  {
+    "id": "6",
+    "firstName": "Laure",
+    "lastName": "Rondeau-Desroches",
+    "name": "Laure Rondeau-Desroches",
+    "role": "Adjointe au maire",
+    "delegation": "Transition écologique, Nature en ville, Déplacements",
+    "photo": "https://www.angers.fr/uploads/_processed_/a/8/csm_rondeau_desroche_fd8a868781.jpg"
+  },
+  {
+    "id": "7",
+    "firstName": "Antoine",
+    "lastName": "Lelarge",
+    "name": "Antoine Lelarge",
+    "role": "Adjoint au maire",
+    "delegation": "Education",
+    "photo": "https://www.angers.fr/uploads/_processed_/5/b/csm_lelarge_7c56cf829a.jpg"
+  },
+  {
+    "id": "8",
+    "firstName": "Sophie",
+    "lastName": "Lebeaupin",
+    "name": "Sophie Lebeaupin",
+    "role": "Adjointe au maire",
+    "delegation": "Quartiers Belle-Beille et Lac-de-Maine",
+    "photo": "https://www.angers.fr/uploads/_processed_/7/d/csm_lebeaupin_be2b0609ed.jpg"
+  },
+  {
+    "id": "9",
+    "firstName": "Nicolas",
+    "lastName": "Dufetel",
+    "name": "Nicolas Dufetel",
+    "role": "Adjoint au maire",
+    "delegation": "Culture et Patrimoine",
+    "photo": "https://www.angers.fr/uploads/_processed_/8/f/csm_dufetel_499f950082.jpg"
+  },
+  {
+    "id": "10",
+    "firstName": "Marie",
+    "lastName": "de Tournemire",
+    "name": "Marie de Tournemire",
+    "role": "Adjointe au maire",
+    "delegation": "Seniors et Santé",
+    "photo": "https://www.angers.fr/uploads/_processed_/3/6/csm_de_tournermire_989eb4590d.jpg"
+  },
+  {
+    "id": "11",
+    "firstName": "Maxence",
+    "lastName": "Henry",
+    "name": "Maxence Henry",
+    "role": "Adjoint au maire",
+    "delegation": "Quartiers Roseraie et Madeleine/Justices/Saint-Léonard",
+    "photo": "https://www.angers.fr/uploads/_processed_/6/b/csm_henry_737287bbb1.jpg"
+  },
+  {
+    "id": "12",
+    "firstName": "Marina",
+    "lastName": "Chupin",
+    "name": "Marina Chupin",
+    "role": "Adjointe au maire",
+    "delegation": "Petite Enfance et Famille",
+    "photo": "https://www.angers.fr/uploads/_processed_/e/3/csm_chupin_0103be0ada.jpg"
+  },
+  {
+    "id": "13",
+    "firstName": "Florian",
+    "lastName": "Rapin",
+    "name": "Florian Rapin",
+    "role": "Adjoint au maire",
+    "delegation": "Bâtiments, Voirie et Risques majeurs",
+    "photo": "https://www.angers.fr/uploads/_processed_/e/e/csm_rapin_22bb01f7e3.jpg"
+  },
+  {
+    "id": "14",
+    "firstName": "Aurélia",
+    "lastName": "Perrotte",
+    "name": "Aurélia Perrotte",
+    "role": "Adjointe au maire",
+    "delegation": "Citoyenneté",
+    "photo": "https://www.angers.fr/uploads/_processed_/a/7/csm_perrotte_5bda99fa50.jpg"
+  },
+  {
+    "id": "15",
+    "firstName": "Benjamin",
+    "lastName": "Kirschner",
+    "name": "Benjamin Kirschner",
+    "role": "Adjoint au maire",
+    "delegation": "Jeunesse et Vie étudiante",
+    "photo": "https://www.angers.fr/uploads/_processed_/f/d/csm_kirschner_ecd68a4800.jpg"
+  },
+  {
+    "id": "16",
+    "firstName": "Karine",
+    "lastName": "Engel",
+    "name": "Karine Engel",
+    "role": "Adjointe au maire",
+    "delegation": "Mémoire, Armées et Maine",
+    "photo": "https://www.angers.fr/uploads/_processed_/f/f/csm_engel_282510f06b.jpg"
+  },
+  {
+    "id": "17",
+    "firstName": "Youssouf",
+    "lastName": "Senoussi",
+    "name": "Youssouf Senoussi",
+    "role": "Adjoint au maire",
+    "delegation": "Quartiers Monplaisir et Deux-Croix/Banchais/Grand-Pigeon",
+    "photo": "https://www.angers.fr/uploads/_processed_/c/7/csm_senoussi_6216bfe86d.jpg"
+  },
+  {
+    "id": "18",
+    "firstName": "Marianne",
+    "lastName": "Desset",
+    "name": "Marianne Desset",
+    "role": "Adjointe au maire",
+    "delegation": "Relations internationales et Europe",
+    "photo": "https://www.angers.fr/uploads/_processed_/5/c/csm_desset_e6a4fd3ea5.jpg"
+  },
+  {
+    "id": "19",
+    "firstName": "Dimitri",
+    "lastName": "Loiseau",
+    "name": "Dimitri Loiseau",
+    "role": "Adjoint au maire",
+    "delegation": "Sports amateurs et professionnels",
+    "photo": "https://www.angers.fr/uploads/_processed_/2/0/csm_loiseau_32c8152231.jpg"
+  },
+  {
+    "id": "20",
+    "firstName": "Nabila",
+    "lastName": "Otmani",
+    "name": "Nabila Otmani",
+    "role": "Adjointe au maire",
+    "delegation": "Piétons, quartiers Centre-ville et Saint-Serge/Ney/Chalouère",
+    "photo": "https://www.angers.fr/uploads/_processed_/3/d/csm_otmani_1989eb687d.jpg"
+  },
+  {
+    "id": "21",
+    "firstName": "Simon",
+    "lastName": "Gigan",
+    "name": "Simon Gigan",
+    "role": "Adjoint au maire",
+    "delegation": "Quartiers Hauts-de-Saint-Aubin et Doutre/Saint-Jacques/Nazareth",
+    "photo": "https://www.angers.fr/uploads/_processed_/e/0/csm_gigan_c5f76b79d8.jpg"
+  },
+  {
+    "id": "22",
+    "firstName": "Roselyne",
+    "lastName": "Bienvenu",
+    "name": "Roselyne Bienvenu",
+    "role": "Conseillère municipale",
+    "delegation": "Ressources humaines",
+    "photo": "https://www.angers.fr/uploads/_processed_/0/3/csm_bienvenu_d58e5bb00f.jpg"
+  },
+  {
+    "id": "23",
+    "firstName": "Richard",
+    "lastName": "Yvon",
+    "name": "Richard Yvon",
+    "role": "Conseiller municipal",
+    "delegation": "Santé",
+    "photo": "https://www.angers.fr/uploads/_processed_/d/c/csm_yvon_12e7318bac.jpg"
+  },
+  {
+    "id": "24",
+    "firstName": "Stéphane",
+    "lastName": "Pabritz",
+    "name": "Stéphane Pabritz",
+    "role": "Conseiller municipal",
+    "delegation": "Propreté",
+    "photo": "https://www.angers.fr/uploads/_processed_/1/2/csm_pabritz_efd6783a6f.jpg"
+  },
+  {
+    "id": "25",
+    "firstName": "Julien",
+    "lastName": "Guillant",
+    "name": "Julien Guillant",
+    "role": "Conseiller municipal",
+    "delegation": "Rapporteur du budget et Commande publique",
+    "photo": "https://www.angers.fr/uploads/_processed_/1/d/csm_guillant_5e1b0cc065.jpg"
+  },
+  {
+    "id": "26",
+    "firstName": "Anita",
+    "lastName": "Dauvillon",
+    "name": "Anita Dauvillon",
+    "role": "Conseillère municipale",
+    "delegation": "Commerce, Artisanat",
+    "photo": "https://www.angers.fr/uploads/_processed_/1/5/csm_dauvillon_fb9a72862b.jpg"
+  },
+  {
+    "id": "27",
+    "firstName": "Christine",
+    "lastName": "Farges",
+    "name": "Christine Farges",
+    "role": "Conseillère municipale",
+    "delegation": "Patrimoine, Cinéma",
+    "photo": "https://www.angers.fr/uploads/_processed_/9/f/csm_farges_44d42551c7.jpg"
+  },
+  {
+    "id": "28",
+    "firstName": "Alexa",
+    "lastName": "Chamoret",
+    "name": "Alexa Chamoret",
+    "role": "Conseillère municipale",
+    "delegation": "Aménagements de proximité, Vélo",
+    "photo": "https://www.angers.fr/uploads/_processed_/4/e/csm_chamoret_6bb00f9657.jpg"
+  },
+  {
+    "id": "29",
+    "firstName": "Antoine",
+    "lastName": "Robert Capblancq",
+    "name": "Antoine Robert Capblancq",
+    "role": "Conseiller municipal",
+    "delegation": "Numérique, Territoire intelligent",
+    "photo": "https://www.angers.fr/uploads/_processed_/2/d/csm_robert_capblancq_79b0ef493f.jpg"
+  },
+  {
+    "id": "30",
+    "firstName": "Isabelle",
+    "lastName": "Prime",
+    "name": "Isabelle Prime",
+    "role": "Conseillère municipale",
+    "delegation": "Coopération internationale",
+    "photo": "https://www.angers.fr/uploads/_processed_/1/f/csm_prime_04bf2e36eb.jpg"
+  },
+  {
+    "id": "31",
+    "firstName": "Augustin",
+    "lastName": "Thieffry",
+    "name": "Augustin Thieffry",
+    "role": "Conseiller municipal",
+    "delegation": "Végétal, quartiers Doutre et Hauts-de-Saint-Aubin",
+    "photo": "https://www.angers.fr/uploads/_processed_/e/7/csm_thieffry_1f36cc4e52.jpg"
+  },
+  {
+    "id": "32",
+    "firstName": "Christine",
+    "lastName": "Blin",
+    "name": "Christine Blin",
+    "role": "Conseillère municipale",
+    "delegation": "Bibliothèques",
+    "photo": "https://www.angers.fr/uploads/_processed_/b/9/csm_blin_98f8e58b60.jpg"
+  },
+  {
+    "id": "33",
+    "firstName": "Jérôme",
+    "lastName": "Chassereau",
+    "name": "Jérôme Chassereau",
+    "role": "Conseiller municipal",
+    "delegation": "Urbanisme",
+    "photo": "https://www.angers.fr/uploads/_processed_/5/e/csm_chassereau_faa1e87716.jpg"
+  },
+  {
+    "id": "34",
+    "firstName": "Augustine",
+    "lastName": "Yecke",
+    "name": "Augustine Yecke",
+    "role": "Conseillère municipale",
+    "delegation": "Enfance, quartier Roseraie",
+    "photo": "https://www.angers.fr/uploads/_processed_/3/6/csm_yecke_360e2f2ff0.jpg"
+  },
+  {
+    "id": "35",
+    "firstName": "Xavier",
+    "lastName": "Baudouin",
+    "name": "Xavier Baudouin",
+    "role": "Conseiller municipal",
+    "delegation": "Sports, Loisirs, Boule de fort, quartier Saint-Serge",
+    "photo": "https://www.angers.fr/uploads/_processed_/d/f/csm_baudouin_c94edbc702.jpg"
+  },
+  {
+    "id": "36",
+    "firstName": "Zahia",
+    "lastName": "Jory",
+    "name": "Zahia Jory",
+    "role": "Conseillère municipale",
+    "delegation": "Sport, Santé, quartiers Doutre et Hauts-de-Saint-Aubin",
+    "photo": "https://www.angers.fr/uploads/_processed_/8/0/csm_jory_1504eb5f90.jpg"
+  },
+  {
+    "id": "37",
+    "firstName": "Laurent",
+    "lastName": "Vieu",
+    "name": "Laurent Vieu",
+    "role": "Conseiller municipal",
+    "delegation": "Réussite éducative",
+    "photo": "https://www.angers.fr/uploads/_processed_/6/a/csm_vieu_4302171825.jpg"
+  },
+  {
+    "id": "38",
+    "firstName": "Marie-Scholastique",
+    "lastName": "Bouldoires",
+    "name": "Marie-Scholastique Bouldoires",
+    "role": "Conseillère municipale",
+    "delegation": "Solidarités",
+    "photo": "https://www.angers.fr/uploads/_processed_/e/3/csm_bouldoires_ddf66288a0.jpg"
+  },
+  {
+    "id": "39",
+    "firstName": "Patric",
+    "lastName": "Bahamed-Athlan",
+    "name": "Patric Bahamed-Athlan",
+    "role": "Conseiller municipal",
+    "delegation": "Sport, Sécurité routière",
+    "photo": "https://www.angers.fr/uploads/_processed_/c/6/csm_bahamed_athlan_8c501865ad.jpg"
+  },
+  {
+    "id": "40",
+    "firstName": "Sylva",
+    "lastName": "Rotureau",
+    "name": "Sylva Rotureau",
+    "role": "Conseillère municipale",
+    "delegation": "Condition animale",
+    "photo": "https://www.angers.fr/uploads/_processed_/0/9/csm_rotureau_2a0725d06b.jpg"
+  },
+  {
+    "id": "41",
+    "firstName": "Angelo",
+    "lastName": "Tocco",
+    "name": "Angelo Tocco",
+    "role": "Conseiller municipal",
+    "delegation": "Accessibilité, Handicap",
+    "photo": "https://www.angers.fr/uploads/_processed_/4/3/csm_tocco_e278ca9352.jpg"
+  },
+  {
+    "id": "42",
+    "firstName": "Victoria-Luz",
+    "lastName": "Redon-Graux",
+    "name": "Victoria-Luz Redon-Graux",
+    "role": "Conseillère municipale",
+    "delegation": "Droit des femmes, quartier Centre-ville/La Fayette/Eblé",
+    "photo": "https://www.angers.fr/uploads/_processed_/d/e/csm_redon_graux_f076061fa7.jpg"
+  },
+  {
+    "id": "43",
+    "firstName": "Ivan",
+    "lastName": "Martineau",
+    "name": "Ivan Martineau",
+    "role": "Conseiller municipal",
+    "delegation": "Mémoire, Éducation",
+    "photo": "https://www.angers.fr/uploads/_processed_/e/d/csm_martineau_8ccbeee6df.jpg"
+  },
+  {
+    "id": "44",
+    "firstName": "Touraya",
+    "lastName": "Marsli",
+    "name": "Touraya Marsli",
+    "role": "Conseillère municipale",
+    "delegation": "Quartier Belle-Beille",
+    "photo": "https://www.angers.fr/uploads/_processed_/e/1/csm_marsli_6c4b5c6e97.jpg"
+  },
+  {
+    "id": "45",
+    "firstName": "Christophe",
+    "lastName": "Marquet",
+    "name": "Christophe Marquet",
+    "role": "Conseiller municipal",
+    "delegation": "Culture, quartier Monplaisir",
+    "photo": "https://www.angers.fr/uploads/_processed_/b/7/csm_marquet_ff6e0f7d35.jpg"
+  },
+  {
+    "id": "46",
+    "firstName": "Peggy",
+    "lastName": "Vulin",
+    "name": "Peggy Vulin",
+    "role": "Conseillère municipale",
+    "delegation": "Quartier Madeleine/Justices/Saint-Léonard",
+    "photo": "https://www.angers.fr/uploads/_processed_/5/3/csm_vulin_44492e0102.jpg"
+  },
+  {
+    "id": "47",
+    "firstName": "Arnaud",
+    "lastName": "Faget",
+    "name": "Arnaud Faget",
+    "role": "Conseiller municipal",
+    "delegation": "Pêche, Nature en ville, quartier Lac-de-Maine",
+    "photo": "https://www.angers.fr/uploads/_processed_/8/b/csm_faget_a9918a1b32.jpg"
+  }
+]
