@@ -1,36 +1,52 @@
 [
   {
-    "id": "TOP-01",
-    "category": "Sécurité",
-    "district": "Centre-ville / Saint-Serge",
-    "title": "Augmenter les effectifs de la Police municipale de 75 à 100 agents",
-    "status": "EN_COURS",
-    "progress": 40,
-    "isTop10": true,
-    "lastUpdate": "2026-06-15",
-    "details": {
-      "description": "Renforcement des équipes de nuit et présence accrue sur la voie publique.",
-      "updates": [
-        "Juin 2026 : Recrutement de 10 nouveaux agents assermentés.",
-        "Janvier 2026 : Lancement de la campagne de recrutement."
-      ]
-    }
+    "id": 1,
+    "thematique": "Sécurité / Prévention",
+    "titre": "Renforcer les effectifs de la Police municipale pour atteindre 100 agents",
+    "statut": "À faire",
+    "generations_angers": false,
+    "notes": "",
+    "mise_a_jour": "24/06/2026",
+    "quartier": "Toute la ville / Transversal"
   },
   {
-    "id": "TOP-05",
-    "category": "Transports",
-    "district": "Tous les quartiers",
-    "title": "Développer les pistes IrigoVélo et rallonger les tramways",
-    "status": "FAIT",
-    "progress": 100,
-    "isTop10": true,
-    "lastUpdate": "2026-04-10",
-    "details": {
-      "description": "Aménagement des voies cyclables sécurisées et livraison des rames étendues.",
-      "updates": [
-        "Avril 2026 : Mise en service des rames rallongées sur la ligne A.",
-        "Novembre 2025 : Finalisation des tronçons cyclables prioritaires."
-      ]
-    }
+    "id": 16,
+    "thematique": "Éducation",
+    "titre": "Offrir un abonnement à un magazine de lecture à chaque enfant en CE1 et en CE2",
+    "statut": "Réalisé",
+    "generations_angers": true,
+    "notes": "Adoption en CM du 29/06/2026",
+    "mise_a_jour": "29/06/2026",
+    "quartier": "Toute la ville / Transversal"
+  },
+  {
+    "id": 43,
+    "thematique": "Commerce",
+    "titre": "Rénover et végétaliser entièrement la rue Saint-Aubin, en partenariat avec les commerçants, pour en faire une rue de référence pour l'avenir",
+    "statut": "À faire",
+    "generations_angers": true,
+    "notes": "",
+    "mise_a_jour": "24/06/2026",
+    "quartier": "Centre-ville / La Fayette / Eblé"
+  },
+  {
+    "id": 85,
+    "thematique": "Transition écologique",
+    "titre": "Développer la géothermie, pour chauffer et refroidir les bâtiments, en particulier sur le secteur Saint-Serge",
+    "statut": "À faire",
+    "generations_angers": false,
+    "notes": "",
+    "mise_a_jour": "24/06/2026",
+    "quartier": "Saint-Serge / Ney / Chalouère"
+  },
+  {
+    "id": 113,
+    "thematique": "Solidarités",
+    "titre": "Créer un nouveau restaurant solidaire dans l'est de la ville sur le modèle du Resto-Troc à Belle-Beille",
+    "statut": "À faire",
+    "generations_angers": false,
+    "notes": "",
+    "mise_a_jour": "24/06/2026",
+    "quartier": "Belle-Beille"
   }
 ]
